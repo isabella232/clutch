@@ -5,16 +5,12 @@ import { TextField as MuiTextField } from "@material-ui/core";
 
 const KEY_ENTER = 13;
 
-const CustomizedTextField = (props: MuiTextFieldProps) => {
-  return <MuiTextField
-    InputLabelProps={{ shrink: true }}
-    InputProps={{ disableUnderline: true }}
-    fullWidth
-    {...props}
-  />
-}
-
-const StyledTextField = styled(CustomizedTextField)(
+const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
+  InputLabelProps={{ shrink: true }}
+  InputProps={{ disableUnderline: true }}
+  fullWidth
+  {...props}
+/>)(
   {
     ".MuiInputLabel-root": {
       fontSize: "13px",
@@ -22,7 +18,7 @@ const StyledTextField = styled(CustomizedTextField)(
       transform: "scale(1)"
     },
 
-    ".MuiInputLabel-root.Mui-focused": {
+    ".MuiInputLabel-root, .MuiInputLabel-root.Mui-focused": {
       color: "rgba(13, 16, 48, 0.6)",
     },
 
@@ -32,7 +28,7 @@ const StyledTextField = styled(CustomizedTextField)(
       fontSize: "16px",
       marginTop: "6px",
       padding: "14px 16px"
-    }
+    },
   }
 );
 
@@ -40,11 +36,11 @@ export interface TextFieldProps extends Pick<MuiTextFieldProps, "defaultValue" |
   onReturn?: () => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({
+const TextField = ({
   onChange,
   onReturn,
   ...props
-}) => {
+}: TextFieldProps) => {
   const onKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement | HTMLTextAreaElement | HTMLInputElement>
   ) => {

@@ -7,29 +7,23 @@ import TextField from "../text-field";
 export default {
   title: "Core/Input/TextField",
   component: TextField,
-  argTypes: {
-    onReturn: { action: "onReturn event" },
-    onChange: { action: "onChange event" },
-  },
 } as Meta;
 
 const Template = (props: TextFieldProps) => <TextField {...props} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  maxWidth: "",
-};
+export const Basic = Template.bind({});
+Basic.args = {
+  label: "Field Label"
+}
 
-export const WithLabel = Template.bind({});
-WithLabel.args = {
-  ...Primary.args,
-  placeholder: "",
-  label: "TextField",
-};
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...Basic.args,
+  disabled: true
+}
 
-export const WithType = Template.bind({});
-WithType.args = {
-  ...Primary.args,
-  label: "Date",
-  type: "datetime-local",
+export const WithPlaceholder = Template.bind({});
+WithPlaceholder.args = {
+  ...Basic.args,
+  placeholder: "This is a placeholder, start typing for input...",
 };
