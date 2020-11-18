@@ -1,35 +1,48 @@
 import React from "react";
-import type { InputLabelProps, TextFieldProps as MuiTextFieldProps } from "@material-ui/core";
+import styled from "@emotion/styled";
+import type { TextFieldProps as MuiTextFieldProps } from "@material-ui/core";
 import { TextField as MuiTextField } from "@material-ui/core";
-import styled from "styled-components";
 
 const KEY_ENTER = 13;
-const StyledTextField = styled(MuiTextField)`
-  ${({ theme, ...props }) => `
-  display: flex;
-  width: 100%;
-  max-width: ${props["data-max-width"] || "500px"};
-  margin: 15px;
-  .MuiInputLabel-root {
-    color: ${theme.palette.text.primary};
-  }
-  .MuiInput-underline:after {
-    border-bottom: 2px solid ${theme.palette.accent.main};
-  }
-  `}
-`;
 
-export interface TextFieldProps {
-  maxWidth?: string;
+const CustomizedTextField = (props: MuiTextFieldProps) => {
+  return <MuiTextField
+    InputLabelProps={{ shrink: true }}
+    InputProps={{ disableUnderline: true }}
+    fullWidth
+    {...props}
+  />
+}
+
+const StyledTextField = styled(CustomizedTextField)(
+  {
+    ".MuiInputLabel-root": {
+      fontSize: "13px",
+      fontWeight: "bold",
+      transform: "scale(1)"
+    },
+
+    ".MuiInputLabel-root.Mui-focused": {
+      color: "rgba(13, 16, 48, 0.6)",
+    },
+
+    ".MuiInput-input": {
+      border: "1px solid rgba(13, 16, 48, 0.38)",
+      borderRadius: "4px",
+      fontSize: "16px",
+      marginTop: "6px",
+      padding: "14px 16px"
+    }
+  }
+);
+
+export interface TextFieldProps extends Pick<MuiTextFieldProps, "defaultValue" | "disabled" | "id" | "inputRef" | "label" | "name" | "onChange" | "placeholder" | "required" | "value"> {
   onReturn?: () => void;
 }
 
-const TextField: React.FC<TextFieldProps & MuiTextFieldProps> = ({
+const TextField: React.FC<TextFieldProps> = ({
   onChange,
   onReturn,
-  maxWidth,
-  placeholder,
-  type,
   ...props
 }) => {
   const onKeyDown = (
@@ -43,26 +56,11 @@ const TextField: React.FC<TextFieldProps & MuiTextFieldProps> = ({
     }
   };
 
-  const inputLabelProps = {
-    color: "secondary",
-  } as Partial<InputLabelProps>;
-
-  const placeholderInputTypes = ["date", "datetime-local", "month", "time", "week"];
-  const hasInputPlaceholder = placeholderInputTypes.indexOf(type) !== -1;
-  if (placeholder || hasInputPlaceholder) {
-    inputLabelProps.shrink = true;
-  }
-
   return (
     <StyledTextField
-      data-max-width={maxWidth}
-      color="secondary"
-      InputLabelProps={inputLabelProps}
       onKeyDown={e => onKeyDown(e)}
       onFocus={onChange}
       onBlur={onChange}
-      placeholder={placeholder}
-      type={type}
       {...props}
     />
   );
