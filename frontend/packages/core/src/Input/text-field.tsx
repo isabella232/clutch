@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import styled from "@emotion/styled";
 import type { TextFieldProps as MuiTextFieldProps } from "@material-ui/core";
 import { TextField as MuiTextField } from "@material-ui/core";
@@ -36,7 +36,7 @@ export interface TextFieldProps extends Pick<MuiTextFieldProps, "defaultValue" |
   onReturn?: () => void;
 }
 
-const TextField = ({
+export const TextField = ({
   onChange,
   onReturn,
   ...props
