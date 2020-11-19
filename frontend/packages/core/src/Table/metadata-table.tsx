@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Table, TableBody, TableCell, TableContainer, TableRow } from "@material-ui/core";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import type { Size } from "@material-ui/core/TableCell";
 import _ from "lodash";
 import styled from "styled-components";
@@ -32,7 +32,8 @@ interface KeyCellProps {
 }
 
 const StyledKeyCell = styled(TableCell)`
-  width: 50%;
+  width: 45%;
+  background: rgba(13, 16, 48, 0.03);
 `;
 
 const KeyCell: React.FC<KeyCellProps> = ({ data, size }) => {
@@ -42,7 +43,11 @@ const KeyCell: React.FC<KeyCellProps> = ({ data, size }) => {
   }
   return (
     <StyledKeyCell size={size}>
-      <strong>{name}</strong>
+      <Typography style={{
+        color: "#0D1030",
+        fontSize: "0.875rem",
+        fontWeight: 500,
+      }}>{name}</Typography>
     </StyledKeyCell>
   );
 };
@@ -60,7 +65,11 @@ const ViewOnlyRow: React.FC<ViewOnlyRowProps> = ({ data, size }) => {
   return (
     <TableRow key={data.id}>
       <KeyCell data={data} size={size} />
-      <TableCell size={size}>{value}</TableCell>
+      <TableCell style={{
+        color: "#0D1030",
+        fontSize: "0.875rem",
+        fontWeight: "normal",
+      }} size={size}>{value}</TableCell>
     </TableRow>
   );
 };
@@ -108,11 +117,11 @@ const EditableRow: React.FC<EditableRowProps> = ({
   );
 };
 
-interface MetadataTableProps {
+export interface MetadataTableProps {
   data: RowData[];
   onUpdate?: (id: string, value: unknown) => void;
   variant?: Size;
-}
+};
 
 const MetadataTable: React.FC<MetadataTableProps> = ({
   data,
@@ -150,7 +159,7 @@ const MetadataTable: React.FC<MetadataTableProps> = ({
   }, []);
 
   return (
-    <TableContainer {...props}>
+    <TableContainer {...props} component={Paper} variant="outlined" style={{border: "0.063rem solid rgba(13, 16, 48, 0.12)", margin: "1rem 2rem", borderBottomWidth: "0"}}>
       {process.env.REACT_APP_DEBUG_FORMS && onUpdate !== undefined && <DevTool control={control} />}
       <Table {...props}>
         <TableBody>
