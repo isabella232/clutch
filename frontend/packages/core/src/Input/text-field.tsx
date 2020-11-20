@@ -57,7 +57,8 @@ const StyledTextField = styled(BaseTextField)(
     },
 
     ".MuiInput-input": {
-      padding: "0"
+      padding: "0",
+      height: "20px",
     },
 
     ".MuiFormHelperText-root": {
@@ -65,7 +66,7 @@ const StyledTextField = styled(BaseTextField)(
       display: "flex",
       position: "relative",
       fontSize: "12px",
-      marginTop: "6px"
+      marginTop: "7px"
     },
 
     ".MuiFormHelperText-root.Mui-error": {
@@ -89,7 +90,6 @@ const StyledTextField = styled(BaseTextField)(
     ".Mui-focused > .MuiInputAdornment-root": {
       display: "inherit",
     },
-
 
     ".MuiInputAdornment-root > svg": {
       cursor: "pointer",
