@@ -1,12 +1,10 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import {
-  InputAdornment,
   InputProps as MuiInputProps,
   MuiStandardTextFieldProps,
   TextField as MuiTextField,
 } from "@material-ui/core";
-import ClearIcon from "@material-ui/icons/Clear";
 import ErrorIcon from "@material-ui/icons/Error";
 import _ from "lodash";
 
@@ -85,18 +83,6 @@ const StyledTextField = styled(BaseTextField)({
     width: "16px",
     marginRight: "5px",
   },
-
-  ".MuiInputAdornment-root": {
-    display: "none",
-  },
-
-  ".Mui-focused > .MuiInputAdornment-root": {
-    display: "inherit",
-  },
-
-  ".MuiInputAdornment-root > svg": {
-    cursor: "pointer",
-  },
 });
 
 export interface TextFieldProps
@@ -131,12 +117,6 @@ export const TextField = ({
   readOnly,
   ...props
 }: TextFieldProps) => {
-  const [isEmpty, setIsEmpty] = React.useState(true);
-  const nestedOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsEmpty(_.isEmpty(e.target.value));
-    onChange && onChange(e);
-  };
-
   const onKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement | HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -148,6 +128,7 @@ export const TextField = ({
     }
   };
 
+  // Prepend a '!' icon to helperText displayed below the form if the form is in an error state.
   if (error) {
     helperText = (
       <>
@@ -162,17 +143,9 @@ export const TextField = ({
       onKeyDown={e => onKeyDown(e)}
       onFocus={onChange}
       onBlur={onChange}
-      onChange={nestedOnChange}
       error={error}
       helperText={helperText}
-      InputProps={{
-        readOnly,
-        endAdornment: !isEmpty && (
-          <InputAdornment position="end">
-            <ClearIcon onClick={() => console.log("ahhh")} />{" "}
-          </InputAdornment>
-        ),
-      }}
+      InputProps={{ readOnly }}
       {...props}
     />
   );
