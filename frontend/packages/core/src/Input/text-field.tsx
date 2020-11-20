@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import type { TextFieldProps as MuiTextFieldProps } from "@material-ui/core";
 import { TextField as MuiTextField } from "@material-ui/core";
+import ErrorIcon from '@material-ui/icons/Error';
 
 const KEY_ENTER = 13;
 
@@ -22,6 +23,10 @@ const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
       color: "rgba(13, 16, 48, 0.6)",
     },
 
+    ".MuiInputLabel-root.Mui-disabled": {
+      color: "rgba(13, 16, 48, 0.38)"
+    },
+
     ".MuiInput-input": {
       border: "1px solid rgba(13, 16, 48, 0.38)",
       borderRadius: "4px",
@@ -29,16 +34,44 @@ const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
       marginTop: "6px",
       padding: "14px 16px"
     },
+
+    ".MuiInput-input.Mui-disabled": {
+      backgroundColor: "rgba(13, 16, 48, 0.14);",
+    },
+
+    ".MuiFormHelperText-root": {
+      verticalAlign: "middle",
+      display: "flex",
+      position: "relative",
+      fontSize: "12px",
+      marginTop: "6px"
+    },
+
+    ".MuiFormHelperText-root.Mui-error": {
+      color: "#db3615"
+    },
+
+    ".Mui-error > .MuiInput-input": {
+      borderColor: "#DB3615"
+    },
+
+    ".MuiFormHelperText-root > svg": {
+      height: "16px",
+      width: "16px",
+      marginRight: "5px"
+    }
   }
 );
 
-export interface TextFieldProps extends Pick<MuiTextFieldProps, "defaultValue" | "disabled" | "id" | "inputRef" | "label" | "name" | "onChange" | "placeholder" | "required" | "value"> {
+export interface TextFieldProps extends Pick<MuiTextFieldProps, "defaultValue" | "disabled" | "error" | "helperText" | "id" | "inputRef" | "label" | "name" | "onChange" | "placeholder" | "required" | "value"> {
   onReturn?: () => void;
 }
 
 export const TextField = ({
   onChange,
   onReturn,
+  error,
+  helperText,
   ...props
 }: TextFieldProps) => {
   const onKeyDown = (
@@ -52,11 +85,20 @@ export const TextField = ({
     }
   };
 
+  if (error) {
+    helperText = <>
+      <ErrorIcon />
+      {helperText}
+    </>
+  }
+
   return (
     <StyledTextField
       onKeyDown={e => onKeyDown(e)}
       onFocus={onChange}
       onBlur={onChange}
+      error={error}
+      helperText={helperText}
       {...props}
     />
   );

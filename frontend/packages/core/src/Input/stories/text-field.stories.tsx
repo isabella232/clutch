@@ -16,14 +16,22 @@ Basic.args = {
   label: "Field Label"
 }
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Basic.args,
-  disabled: true
-}
-
 export const WithPlaceholder = Template.bind({});
 WithPlaceholder.args = {
   ...Basic.args,
   placeholder: "This is a placeholder, start typing for input...",
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...Basic.args,
+  disabled: true
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  ...Basic.args,
+  error: true,
+  helperText: "There was a problem"
+}
+
