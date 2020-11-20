@@ -27,6 +27,10 @@ const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
       color: "rgba(13, 16, 48, 0.38)"
     },
 
+    ".MuiInputLabel-root.Mui-error": {
+      color: "#db3615"
+    },
+
     ".MuiInput-input": {
       border: "1px solid rgba(13, 16, 48, 0.38)",
       borderRadius: "4px",
@@ -35,8 +39,12 @@ const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
       padding: "14px 16px"
     },
 
+    ".Mui-focused > .MuiInput-input": {
+      borderColor: "#3548D4",
+    },
+
     ".MuiInput-input.Mui-disabled": {
-      backgroundColor: "rgba(13, 16, 48, 0.14);",
+      backgroundColor: "rgba(13, 16, 48, 0.12)",
     },
 
     ".MuiFormHelperText-root": {
@@ -52,7 +60,7 @@ const StyledTextField = styled((props: MuiTextFieldProps) => <MuiTextField
     },
 
     ".Mui-error > .MuiInput-input": {
-      borderColor: "#DB3615"
+      borderColor: "#db3615"
     },
 
     ".MuiFormHelperText-root > svg": {
