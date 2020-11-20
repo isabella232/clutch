@@ -101,28 +101,36 @@ const StyledTextField = styled(BaseTextField)({
 
 export interface TextFieldProps
   extends Pick<
-    MuiStandardTextFieldProps,
-    | "defaultValue"
-    | "disabled"
-    | "error"
-    | "helperText"
-    | "id"
-    | "inputRef"
-    | "label"
-    | "multiline"
-    | "name"
-    | "onChange"
-    | "onFocus"
-    | "onKeyDown"
-    | "placeholder"
-    | "required"
-    | "type"
-    | "value"
-  >, Pick<MuiInputProps, "readOnly"> {
+      MuiStandardTextFieldProps,
+      | "defaultValue"
+      | "disabled"
+      | "error"
+      | "helperText"
+      | "id"
+      | "inputRef"
+      | "label"
+      | "multiline"
+      | "name"
+      | "onChange"
+      | "onFocus"
+      | "onKeyDown"
+      | "placeholder"
+      | "required"
+      | "type"
+      | "value"
+    >,
+    Pick<MuiInputProps, "readOnly"> {
   onReturn?: () => void;
 }
 
-export const TextField = ({ onChange, onReturn, error, helperText, readOnly, ...props }: TextFieldProps) => {
+export const TextField = ({
+  onChange,
+  onReturn,
+  error,
+  helperText,
+  readOnly,
+  ...props
+}: TextFieldProps) => {
   const [isEmpty, setIsEmpty] = React.useState(true);
   const nestedOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsEmpty(_.isEmpty(e.target.value));

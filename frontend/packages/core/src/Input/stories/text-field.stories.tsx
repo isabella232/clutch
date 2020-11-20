@@ -40,5 +40,5 @@ export const MultipleLines = Template.bind({});
 MultipleLines.args = {
   ...Basic.args,
   multiline: true,
-  defaultValue: "This is\nan example\nof multiline content"
-}
+  defaultValue: "This is\nan example\nof multiline content",
+};
