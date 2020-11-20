@@ -17,11 +17,6 @@ Basic.args = {
   placeholder: "This is a placeholder, start typing",
 }
 
-// export const WithPlaceholder = Template.bind({});
-// WithPlaceholder.args = {
-//   ...Basic.args,
-// };
-
 export const Disabled = Template.bind({});
 Disabled.args = {
   ...Basic.args,
@@ -33,5 +28,11 @@ Error.args = {
   ...Basic.args,
   error: true,
   helperText: "There was a problem!"
+}
+
+export const WithoutLabel = Template.bind({});
+WithoutLabel.args = {
+  ...Basic.args,
+  label: null,
 }
 
